@@ -29,13 +29,21 @@ app.get('/history', function(req, res){
   });
 });
 
-app.get('/setmode/:mode', function(req, res){
+app.get('/playlists', function(req, res){
+  mopidy.on('state:online', function(){
+    mopidy.
+  });
+});
 
-  var video = youtubedl('http://www.youtube.com/watch?v=90AiXO1pAiA',
-    // Optional arguments passed to youtube-dl.
-    ['--format=18'],
+app.get('/setmode/:mode', function(req, res){
+  playVideo('https://www.youtube.com/watch?v=tCn-qeMXdwU')
+  queueAndPlay('79kAfkACIjyA4QYyE6j5zQ', 1);
+});
+
+var playVideo = function(videourl){
+  var video = youtubedl(videourl,
     // Additional options can be given for calling `child_process.execFile()`.
-    { cwd: __dirname }
+    // { cwd: __dirname }
   );
 
   // Will be called when the download starts.
@@ -44,11 +52,30 @@ app.get('/setmode/:mode', function(req, res){
     var player = Omx(info.url);
 
   });
-})
-
-function spacemode(){
-
 }
+
+var trackDesc = function (track) {
+    return track.name + " by " + track.artists[0].name +
+        " from " + track.album.name;
+};
+
+var queueAndPlay = function (playlistNum, trackNum) {
+    playlistNum = playlistNum || 0;
+    trackNum = trackNum || 0;
+    mopidy.playlists.getPlaylists().then(function (playlists) {
+        var playlist = playlists[playlistNum];
+        console.log("Loading playlist:", playlist.name);
+        return mopidy.tracklist.add(playlist.tracks).then(function (tlTracks) {
+            return mopidy.playback.play(tlTracks[trackNum]).then(function () {
+                return mopidy.playback.getCurrentTrack().then(function (track) {
+                    console.log("Now playing:", trackDesc(track));
+                });
+            });
+        });
+    })
+    .catch(console.error.bind(console)) // Handle errors here
+    .done();                            // ...or they'll be thrown here
+};
 
 
 
