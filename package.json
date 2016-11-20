@@ -1,0 +1,33 @@
+{
+  "name": "falcomation",
+  "version": "1.0.0",
+  "description": "home automation",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brandongroce/falcomation.git"
+  },
+  "keywords": [
+    "node",
+    "automation",
+    "alexa",
+    "dmx",
+    "raspberrypi"
+  ],
+  "author": "brandon@brandongroce.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brandongroce/falcomation/issues"
+  },
+  "homepage": "https://github.com/brandongroce/falcomation#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "fs": "0.0.1-security",
+    "mopidy": "^0.5.0",
+    "node-omxplayer": "^0.4.1",
+    "youtube-dl": "^1.11.1"
+  }
+}
