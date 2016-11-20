@@ -31,7 +31,12 @@ app.get('/history', function(req, res){
 
 app.get('/playlists', function(req, res){
   mopidy.on('state:online', function(){
-    mopidy.
+    mopidy.playlists.getPlaylists().then(function (playlists) {
+        res.send(JSON.parse(playlists));
+        console.log(playlists);
+    })
+    .catch(console.error.bind(console)) // Handle errors here
+    .done();
   });
 });
 
