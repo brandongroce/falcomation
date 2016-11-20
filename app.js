@@ -46,7 +46,7 @@ app.get('/setmode/:mode', function(req, res){
 });
 
 var playVideo = function(videourl){
-  var video = youtubedl(videourl,
+  var video = youtubedl(videourl
     // Additional options can be given for calling `child_process.execFile()`.
     // { cwd: __dirname }
   );
