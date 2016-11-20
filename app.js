@@ -10,15 +10,22 @@ var mopidy = new Mopidy({
     callingConvention: "by-position-or-by-name"
 });
 
-app.get('/version', function (req, res) {
+var version = function(res){
+  console.log("checking connection...");
   mopidy.on("state:online", function () {
     console.log("Connected to Mopidy");
     mopidy.getVersion({}).then(function(data){
       console.log("Version: ", data);
       res.send(data);
-    });
+    })
+    .catch(console.error.bind(console)) // Handle errors here
+    .done();;
   });
-})
+}
+
+app.get('/healthcheck', function (req, res) {
+  version(res);
+});
 
 app.get('/history', function(req, res){
   mopidy.on("state:online", function(){
