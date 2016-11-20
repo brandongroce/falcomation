@@ -48,7 +48,7 @@ app.get('/playlists', function(req, res){
 app.get('/setmode/:mode', function(req, res){
   playVideo('https://www.youtube.com/watch?v=tCn-qeMXdwU')
   console.log("fetching playlists");
-  queueAndPlay('spotify:user:1213350997:playlist:79kAfkACIjyA4QYyE6j5zQ', 1);
+  queueAndPlay('spotify:user:1213350997:playlist:79kAfkACIjyA4QYyE6j5zQ', 1, res);
 });
 
 var playVideo = function(videourl){
@@ -70,7 +70,7 @@ var trackDesc = function (track) {
         " from " + track.album.name;
 };
 
-var queueAndPlay = function (playlistNum, trackNum) {
+var queueAndPlay = function (playlistNum, trackNum, res) {
     playlistNum = playlistNum || 0;
     trackNum = trackNum || 0;
     mopidy.playlists.getPlaylists().then(function (playlists) {
@@ -98,6 +98,7 @@ var queueAndPlay = function (playlistNum, trackNum) {
                 console.log("track started");
                 return mopidy.playback.getCurrentTrack().then(function (track) {
                     console.log("Now playing:", trackDesc(track));
+                    res.send("Space Mode Enabled");
                 });
             });
         }).catch(console.error.bind(console));
