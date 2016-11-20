@@ -1,4 +1,4 @@
-var Mopidy = require('Mopidy'),
+var Mopidy = require('mopidy'),
     express = require('express'),
     Omx = require('node-omxplayer'),
     fs = require('fs'),
@@ -42,7 +42,7 @@ app.get('/setmode/:mode', function(req, res){
   video.on('info', function(info) {
     console.log(info.url);
     var player = Omx(info.url);
-    
+
   });
 })
 
