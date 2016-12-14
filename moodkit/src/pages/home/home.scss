@@ -1,0 +1,13 @@
+page-home {
+  ion-content#Iceland {
+    background-image:url('http://farm1.staticflickr.com//570//30731806564_7a0e4d9cbf_k.jpg');
+    background-size:cover;
+  }
+  ion-card.card-md {
+    background-color:rgba(0,0,0,.3);
+
+    ion-item.item-md {
+      background-color:rgba(0,0,0,.7);
+    }
+  }
+}

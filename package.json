@@ -24,10 +24,13 @@
   },
   "homepage": "https://github.com/brandongroce/falcomation#readme",
   "dependencies": {
+    "airplay": "git@github.com:benvanik/node-airplay.git#572640a62a2bc705b6751772ede331f4a2de700d",
     "express": "^4.14.0",
     "fs": "0.0.1-security",
     "mopidy": "^0.5.0",
+    "node-hue-api": "^2.3.0",
     "node-omxplayer": "^0.4.1",
+    "pi-gpio": "0.0.8",
     "youtube-dl": "^1.11.1"
   }
 }
