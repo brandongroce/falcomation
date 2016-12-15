@@ -1,8 +1,23 @@
 $colorLight:#fafafa;
 page-home {
-  ion-content#Iceland {
-    background-image:url('http://farm1.staticflickr.com//570//30731806564_7a0e4d9cbf_k.jpg');
+  ion-content {
     background-size:cover;
+  }
+  ion-content.icelandBackground {
+    background-image:url('/assets/greenland.jpg');
+  }
+  ion-content.spaceBackground {
+    background-image:url('/assets/milkysky.jpg');
+  }
+
+  ion-content.xoxoBackground {
+    background-image:url('/assets/love.jpg');
+  }
+  ion-content.sleepBackground {
+    background-image:url('/assets/sleep1.png');
+  }
+  ion-content.baliBackground {
+    background-image:url('/assets/bali1.jpg');
   }
   ion-card.card-md {
     background-color:rgba(0,0,0,.3);
@@ -16,5 +31,8 @@ page-home {
   }
   .scroll-content {
     overflow:auto;
+  }
+  .item.item-md .checkbox-md {
+    margin-right:9px;
   }
 }
