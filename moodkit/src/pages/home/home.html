@@ -4,7 +4,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding id="Iceland">
+<ion-content id="Iceland" scrollbar-x="false" scrollbar-y="false" fullscreen="true">
   <ion-card>
 
     <ion-card-content>
@@ -12,9 +12,13 @@
         Welcome to "The Land of Fire and Ice"
       </ion-card-title>
       <p>
-        <span style="font-size:16px">"Iceland is a land of extreme contrasts"</span>
         Iceland is home to some of the largest glaciers in Europe, and some of the world's most active volcanoes. Iceland is also the land of light and darkness. Long summer days with nearly 24-hours of sunshine are offset by short winter days with only few hours of daylight.
+        <button ion-button>Start This Mood</button>
       </p>
+      <!-- <button ion-button color="dark" (click)="showCheckbox()">
+          <ion-icon name='construct' is-active="false"></ion-icon>
+          Settings
+      </button> -->
     </ion-card-content>
 
     <ion-item>
@@ -24,7 +28,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-icon name="musical-notes" item-left style="color: #55acee"></ion-icon>
+      <ion-icon name="musical-notes" item-left style="color: #55eeaa"></ion-icon>
       Playlist
       <ion-badge item-right>MK Iceland</ion-badge>
     </ion-item>
@@ -35,9 +39,4 @@
       <ion-badge item-right>Iceland Phantom</ion-badge>
     </ion-item>
   </ion-card>
-  <button ion-button color="dark" (click)="showCheckbox()">
-      <ion-icon name='construct' is-active="false"></ion-icon>
-      Settings
-    </button>
-    <button ion-button>Start Mood Mode</button>
 </ion-content>

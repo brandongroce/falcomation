@@ -1,3 +1,4 @@
+$colorLight:#fafafa;
 page-home {
   ion-content#Iceland {
     background-image:url('http://farm1.staticflickr.com//570//30731806564_7a0e4d9cbf_k.jpg');
@@ -9,5 +10,11 @@ page-home {
     ion-item.item-md {
       background-color:rgba(0,0,0,.7);
     }
+    p, .card-title-md {
+      color:$colorLight;
+    }
+  }
+  .scroll-content {
+    overflow:auto;
   }
 }
