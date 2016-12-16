@@ -25,6 +25,7 @@
   "homepage": "https://github.com/brandongroce/falcomation#readme",
   "dependencies": {
     "airplay": "git@github.com:benvanik/node-airplay.git#572640a62a2bc705b6751772ede331f4a2de700d",
+    "cors": "^2.8.1",
     "express": "^4.14.0",
     "fs": "0.0.1-security",
     "mopidy": "^0.5.0",

@@ -4,14 +4,18 @@ import { NavController } from 'ionic-angular';
 import { Injectable }     from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
+import { MoodService } from '../../providers/mood-service';
+
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+  providers: [MoodService]
 })
-@Injectable()
+
 export class HomePage {
 
   mode: Object;
+  track: Object;
   tabMap: Object = {
     't0-0':{
       mode:"iceland",
@@ -64,9 +68,8 @@ export class HomePage {
       bgImage:"bali1.jpg"
     }
   }
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private http:Http) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public moodService: MoodService) {
     this.mode = this.tabMap[navCtrl.id];
-
       let tabs = <NodeList>document.querySelectorAll("a.tab-button");
       [].forEach.call(tabs, function(tab){
         tab.removeAttribute('href');
@@ -75,11 +78,11 @@ export class HomePage {
   }
 
   startMode(mode:String){
-    var error = this.http.get('http://localhost:3010')
-    .map(function(response){
-      console.log("RESPONSE: ", response);
+    this.moodService.load(mode)
+    .then(data => {
+      console.log("Mood has started: ", data);
+      this.track = data;
     });
-    console.log("ERROR: ", error);
   }
 
   showCheckbox() {
