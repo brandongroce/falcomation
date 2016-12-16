@@ -1,38 +1,41 @@
-var express = require('express');
-var router = express.Router();
-var config = require('./config/config');
-var musicready = false;
+var config = require('../config/config');
+var MopidyService = require('../services/mopidy').MopidyService;
 
-
-var musicService = new require('./services/mopidy').MopidyService(config.mopidy.socketUrl);
-musicService.on('ready', function(){
-    console.log("Ready event received");
-    musicready = true;
-});
-
-
-class MusicPlayer {
-    constructor(musicService, mode){
+exports.MusicPlayer = class MusicPlayer {
+    constructor(mode){
         this.mode = mode;
-        this.service = musicService;
+        this.service = new MopidyService(config.mopidy.socketUrl);
     }
 
-    loadModePlaylist(req, res){
-        if(musicready){
-            this.service.queuePlaylist(this.mode.playlist);
-        }
-        musicService.on('tracklist:loaded', function(tracks){
-            console.log("tracklist event received, starting playback");
-            this.service.startPlayback();
-        });
-        musicService.on('playback:started', function(){
-            console.log("playback started event received, getting trackinfo");
-            this.service.getCurrentTrack();
-        });
-        musicService.on('trackinfo', function(trackinfo){
-            console.log("trackinfo event received", trackinfo);
-        });
+    getService() {
+      return this.service;
     }
-}
 
+    setMode(mode){
+      this.mood = mode;
+    }
 
+    loadModePlaylist(){
+          this.service.queuePlaylist(this.mode.playlist);
+
+          this.service.on('tracklist:loaded', function(tracks){
+              console.log('tracklist event received, starting playback');
+              console.log('Got Tracks');
+              this.service.startPlayback();
+          }.bind(this));
+          this.service.on('playback:started', function(){
+              console.log('playback started event received, getting trackinfo');
+              this.service.getCurrentTrack();
+          }.bind(this));
+          this.service.on('trackinfo', function(trackinfo){
+              console.log('trackinfo event received', trackinfo);
+              this.service.emit('playlist:loadcomplete', trackinfo);
+          }.bind(this));
+    }
+};
+
+exports.HueController = class HueController {
+    constructor(){
+
+    }
+};

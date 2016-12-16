@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import { AlertController } from 'ionic-angular';
 import { NavController } from 'ionic-angular';
-
+import { Injectable }     from '@angular/core';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
+@Injectable()
 export class HomePage {
 
   mode: Object;
@@ -61,12 +64,22 @@ export class HomePage {
       bgImage:"bali1.jpg"
     }
   }
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private http:Http) {
     this.mode = this.tabMap[navCtrl.id];
+
+      let tabs = <NodeList>document.querySelectorAll("a.tab-button");
+      [].forEach.call(tabs, function(tab){
+        tab.removeAttribute('href');
+        console.log(tab);
+      });
   }
 
   startMode(mode:String){
-    console.log(mode);
+    var error = this.http.get('http://localhost:3010')
+    .map(function(response){
+      console.log("RESPONSE: ", response);
+    });
+    console.log("ERROR: ", error);
   }
 
   showCheckbox() {
